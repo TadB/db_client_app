@@ -35,7 +35,7 @@ public class Employee {
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
-	
+
     public int getEmployeeId() {
 		return employeeId;
 	}

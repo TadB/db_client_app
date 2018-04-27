@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 
 public class EmployeesDAL {
 	private SQLException ex;
@@ -27,7 +28,30 @@ public class EmployeesDAL {
     public int udpateEmployee(Employee emp){
         try (Statement statement =
             connect.createStatement();){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPatter("yyyyMMdd");    
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String hireDate = dtf.format(emp.getHireDate());
+
+        String query="UPDATE EMPLOYEES SET"
+                    + "LAST_NAME = '" + emp.getLastName() + "',"
+                    + "FIST_NAME = '" + emp.getFirstName() + "',"
+                    + "EMAIL = '" + emp.getEmail() + "',"
+                    + "PHONE_NUMBER = '" + emp.getPhone() + "',"
+                    + "JOB_ID = '" + emp.getJobId() + "',"
+                    + "SALARY = " +emp.getSalary()
+                    + "MANAGER_ID = " +emp.getManagerId()
+                    + "DEPARTMENT_ID =  " +emp.getDepartmentId()
+                    + "HIRE_DATE = to_date('"+ hireDate + "', 'yyyMMdd'),"
+                    + "WHERE "
+                    + "EMPLOYEE_ID = " + emp.getEmployeeId();
+
+        int affectedRows=statement.executeUpdate(query);
+        connect.commit();
+        return affectedRows;
+
+        }
+        catch(SQLException ex) {
+        	this.ex = ex;
+        	return 0;
         }
     }
     private Employee rs2Employee(ResultSet resultSet){
@@ -35,7 +59,7 @@ public class EmployeesDAL {
         try{
             int col=1;
             emp = new Employee(resultSet.getInt(col++));
-            emp.setEmployeeId(resultSet.getInt(col++));
+            //emp.setEmployeeId(resultSet.getInt(col++));
             emp.setFirstName(resultSet.getNString(col++));
             emp.setLastName(resultSet.getNString(col++));
             emp.setEmail(resultSet.getNString(col++));
