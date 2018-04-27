@@ -41,6 +41,33 @@ public class EmployeesDAL {
         }
         return employees;
     }
+    public void insertEmployee(Employee emp){
+        try (Statement statement =
+            connect.createStatement();){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String hireDate = dtf.format(emp.getHireDate());
+
+        String query="INSERT INTO EMPLOYEES VALUES ("
+                    + emp.getEmployeeId()+ "',"
+                    + "'" + emp.getLastName() + "',"
+                    + "'" + emp.getFirstName() + "',"
+                    + "'" + emp.getEmail() + "',"
+                    + "'" + emp.getPhone() + "',"
+                    + "'" + emp.getJobId() + "',"
+                    +emp.getSalary()+ "',"
+                    +emp.getManagerId()+ "',"
+                    +emp.getDepartmentId()+ "',"
+                    + "to_date('"+ hireDate + "', 'yyyMMdd')', ";
+
+        statement.executeUpdate(query);
+        connect.commit();
+
+        }
+        catch(SQLException ex) {
+        	this.ex = ex;
+        	return;
+        }
+    }
     public int udpateEmployee(Employee emp){
         try (Statement statement =
             connect.createStatement();){
