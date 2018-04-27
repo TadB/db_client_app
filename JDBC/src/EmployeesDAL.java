@@ -22,7 +22,23 @@ public class EmployeesDAL {
                 employees.add(rs2Employee(resultSet));
             }
         }
-        catch(SQLException ex){System.out.println(ex);}
+        catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return employees;
+    }
+    public Employee getEmployeeByEmployeeId(int employeeId, Employee emp){
+        Employee employees = new Employee();
+        try(Statement statement=connect.createStatement();){
+            String query = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID =" + emp.getEmployeeId();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                employees.add(rs2Employee(resultSet));
+            }
+        }
+        catch(SQLException ex){
+            System.out.println(ex);
+        }
         return employees;
     }
     public int udpateEmployee(Employee emp){
