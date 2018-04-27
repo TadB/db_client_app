@@ -5,8 +5,13 @@ import java.sql.SQLException;
 public class OraConn {
 static int errorNr;
 static String errorDesc;
-//TODO: co to znaczy ze jest static zmienna? -> sprawdz to
-public static void open(Connection connect, String url, String user, String pass) {
+static Connection connect = null;
+static String oracleURL, userName, passwd;
+public OraConn() {
+	
+}
+
+public static void open() {
     if (connect == null) {
             try{
                     //rejestracja sterownika Oracle JDBC
@@ -21,7 +26,7 @@ public static void open(Connection connect, String url, String user, String pass
                     // String oracleURL=url;
                     // String userName=user;
                     // String passwd=pass;
-                    connect = DriverManager.getConnection(url, user, pass);
+                    connect = DriverManager.getConnection(oracleURL, userName, passwd);
             } catch(SQLException ex) {
                     System.out.println("Błąd połączenia z bazą danych "+ ex.getMessage());
                     errorNr = ex.getErrorCode();
@@ -37,7 +42,7 @@ public static void open(Connection connect, String url, String user, String pass
 
 
 }
-public static void close(Connection connect) {
+public static void close() {
     if (connect != null) {
             try {
                     //zamkniecie polaczenia
@@ -55,5 +60,31 @@ public static void close(Connection connect) {
             return;
     }
 
-};
+}
+//getters and setters
+
+public static String getOracleURL() {
+	return oracleURL;
+}
+public static void setOracleURL(String oracleURL) {
+	OraConn.oracleURL = oracleURL;
+}
+public static String getUserName() {
+	return userName;
+}
+public static void setUserName(String userName) {
+	OraConn.userName = userName;
+}
+public static String getPasswd() {
+	return passwd;
+}
+public static void setPasswd(String passwd) {
+	OraConn.passwd = passwd;
+}
+public static int getErrorNr() {
+	return errorNr;
+}
+public static String getErrorDesc() {
+	return errorDesc;
+}
 }
