@@ -66,6 +66,10 @@ public static void close() {
 public static String getOracleURL() {
 	return oracleURL;
 }
+public static Connection getConnect() {
+	return connect;
+}
+
 public static void setOracleURL(String oracleURL) {
 	OraConn.oracleURL = oracleURL;
 }
