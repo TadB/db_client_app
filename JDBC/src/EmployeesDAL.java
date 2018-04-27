@@ -42,25 +42,24 @@ public class EmployeesDAL {
         return employees;
     }
     public void insertEmployee(Employee emp){
-        try (Statement statement =
-            connect.createStatement();){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String hireDate = dtf.format(emp.getHireDate());
+        try (Statement statement = connect.createStatement();){
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
+            String hireDate = dtf.format(emp.getHireDate());
 
-        String query="INSERT INTO EMPLOYEES VALUES ("
-                    + emp.getEmployeeId()+ "',"
-                    + "'" + emp.getLastName() + "',"
-                    + "'" + emp.getFirstName() + "',"
-                    + "'" + emp.getEmail() + "',"
-                    + "'" + emp.getPhone() + "',"
-                    + "'" + emp.getJobId() + "',"
-                    +emp.getSalary()+ "',"
-                    +emp.getManagerId()+ "',"
-                    +emp.getDepartmentId()+ "',"
-                    + "to_date('"+ hireDate + "', 'yyyMMdd')', ";
+            String query="INSERT INTO EMPLOYEES VALUES ("
+                        + emp.getEmployeeId()+ "',"
+                        + "'" + emp.getLastName() + "',"
+                        + "'" + emp.getFirstName() + "',"
+                        + "'" + emp.getEmail() + "',"
+                        + "'" + emp.getPhone() + "',"
+                        + "'" + emp.getJobId() + "',"
+                        +emp.getSalary()+ "',"
+                        +emp.getManagerId()+ "',"
+                        +emp.getDepartmentId()+ "',"
+                        + "to_date('"+ hireDate + "', 'yyyMMdd')', ";
 
-        statement.executeUpdate(query);
-        connect.commit();
+            statement.executeUpdate(query);
+            connect.commit();
 
         }
         catch(SQLException ex) {
@@ -95,6 +94,18 @@ public class EmployeesDAL {
         catch(SQLException ex) {
         	this.ex = ex;
         	return 0;
+        }
+    }
+    public void delEmployee(int employeeId){
+        try (Statement statement = connect.createStatement();){
+            String query = "DELETE FROM EMPLOYEES WHERE EMPLOEE_ID="
+                        + employeeId;
+            statement.executeQuery(query);
+            connect.commit();
+        }
+        catch(SQLException ex) {
+            this.ex = ex;
+            return;
         }
     }
     private Employee rs2Employee(ResultSet resultSet){
