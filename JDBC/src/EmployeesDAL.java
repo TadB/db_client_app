@@ -27,8 +27,8 @@ public class EmployeesDAL {
         }
         return employees;
     }
-    public Employee getEmployeeByEmployeeId(int employeeId, Employee emp){
-        Employee employees = new Employee();
+    public vector <Employee> getEmployeeByEmployeeId(int employeeId, Employee emp){
+        vector <Employee employees = new Employee();
         try(Statement statement=connect.createStatement();){
             String query = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID =" + emp.getEmployeeId();
             ResultSet resultSet = statement.executeQuery(query);

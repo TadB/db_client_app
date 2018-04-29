@@ -14,9 +14,6 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public void add(Employee employee) {
-
-    }
     public String getJobId() {
 		return jobId;
 	}
