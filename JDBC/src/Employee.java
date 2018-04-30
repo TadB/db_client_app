@@ -13,6 +13,13 @@ public class Employee {
     public Employee(int employeeId){
         this.employeeId = employeeId;
     }
+	public String getAll(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String stringHireDate = hireDate.format(formatter);
+
+
+		return String.valueOf(employeeId)+" | "+firstName+" | "+lastName+" | "+email+" | " +phone+" | "+jobID+" | "+ stringHireDate+" | "+String.valueOf(managerId)+" | "+String.valueOf(departmentId)+" | "+String.valueOf(salary);
+	}//TODO: przetestowac czy wszystko dobrze dziala 
 
     public String getJobId() {
 		return jobId;
