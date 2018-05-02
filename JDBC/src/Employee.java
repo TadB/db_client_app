@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Employee {
 	int employeeId;
@@ -18,7 +19,7 @@ public class Employee {
         String stringHireDate = hireDate.format(formatter);
 
 
-		return String.valueOf(employeeId)+" | "+firstName+" | "+lastName+" | "+email+" | " +phone+" | "+jobID+" | "+ stringHireDate+" | "+String.valueOf(managerId)+" | "+String.valueOf(departmentId)+" | "+String.valueOf(salary);
+		return String.valueOf(employeeId)+" | "+firstName+" | "+lastName+" | "+email+" | " +phone+" | "+jobId+" | "+ stringHireDate+" | "+String.valueOf(managerId)+" | "+String.valueOf(departmentId)+" | "+String.valueOf(salary);
 	}//TODO: przetestowac czy wszystko dobrze dziala 
 
     public String getJobId() {

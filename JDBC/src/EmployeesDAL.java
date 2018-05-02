@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.format.DateTimeFormatter;
+import java.util.Vector;
 
 public class EmployeesDAL {
 	private SQLException ex;
@@ -13,13 +14,13 @@ public class EmployeesDAL {
     public EmployeesDAL(Connection connectionInfo){
         connect= connectionInfo;
     }
-    public Employee getEmployees(){
-        Employee employees = new Employee();
+    public Vector <Employee> getEmployees(){
+       Vector <Employee> employees=new Vector <Employee>();
         try(Statement statement=connect.createStatement();){
-            String query = "SELECT * FROM EMPLOYEES";
+            String query = "SELECT * FROM EMPLOYEES ORDER BY LAST_NAME";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
-                employees.add(rs2Employee(resultSet));
+            	employees.add(rs2Employee(resultSet));
             }
         }
         catch(SQLException ex){
@@ -27,8 +28,8 @@ public class EmployeesDAL {
         }
         return employees;
     }
-    public vector <Employee> getEmployeeByEmployeeId(int employeeId, Employee emp){
-        vector <Employee employees = new Employee();
+    public Vector <Employee> getEmployeeByEmployeeId(int employeeId, Employee emp){
+    	Vector <Employee> employees=new Vector <Employee>();
         try(Statement statement=connect.createStatement();){
             String query = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID =" + emp.getEmployeeId();
             ResultSet resultSet = statement.executeQuery(query);
