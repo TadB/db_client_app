@@ -1,5 +1,4 @@
 import java.util.Vector;
-
 public class Test {
 
 	public static void main(String[] args) {
@@ -27,6 +26,10 @@ public class Test {
 					);
 			iter++;
 		}
+		//test metody pobierania danych wybranego rekordu z bazy danych szukajacego po podaniu id
+		outData=db.getEmployeeByEmployeeId(4);
+		printDataBase(outData);
+
         //test metody dodawania uzytkownika
 
 		
@@ -36,4 +39,17 @@ public class Test {
 
 
 
-}}
+	}
+
+
+void printDataBase(Vector<Employee> outData){
+	//TODO: przekazac przez referencje wektor
+	int iter=0;
+		while(iter<outData.size()){
+			System.out.println(
+					outData.get(iter).getAll()
+					);
+			iter++;
+		}
+}
+};

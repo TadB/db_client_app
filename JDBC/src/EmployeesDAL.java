@@ -28,10 +28,10 @@ public class EmployeesDAL {
         }
         return employees;
     }
-    public Vector <Employee> getEmployeeByEmployeeId(int employeeId, Employee emp){
+    public Vector <Employee> getEmployeeByEmployeeId(int employeeId){
     	Vector <Employee> employees=new Vector <Employee>();
         try(Statement statement=connect.createStatement();){
-            String query = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID =" + emp.getEmployeeId();
+            String query = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID =" + employeeId;
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 employees.add(rs2Employee(resultSet));
