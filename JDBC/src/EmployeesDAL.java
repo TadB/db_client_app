@@ -17,7 +17,7 @@ public class EmployeesDAL {
     public Vector <Employee> getEmployees(){
        Vector <Employee> employees=new Vector <Employee>();
         try(Statement statement=connect.createStatement();){
-            String query = "SELECT * FROM EMPLOYEES ORDER BY LAST_NAME";
+            String query = "SELECT * FROM EMPLOYEES ORDER BY EMPLOYEE_ID";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
             	employees.add(rs2Employee(resultSet));

@@ -3,15 +3,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class OraConn {
-static int errorNr;
-static String errorDesc;
-static Connection connect = null;
-static String oracleURL, userName, passwd;
+ int errorNr;
+ String errorDesc;
+ Connection connect = null;
+ String oracleURL, userName, passwd;
 public OraConn() {
 	
 }
 
-public static void open() {
+public  void open() {
     if (connect == null) {
             try{
                     //rejestracja sterownika Oracle JDBC
@@ -20,7 +20,6 @@ public static void open() {
                     System.out.println("Brak sterownika Oracle JDBC.");
             }
             System.out.println("sterowni oracle jdbc zostal zarejestrowany");
-
             //nawiazanie polaczenia:
             try{
                     // String oracleURL=url;
@@ -42,7 +41,7 @@ public static void open() {
 
 
 }
-public static void close() {
+public  void close() {
     if (connect != null) {
             try {
                     //zamkniecie polaczenia
@@ -63,32 +62,43 @@ public static void close() {
 }
 //getters and setters
 
-public static String getOracleURL() {
+public  String getOracleURL() {
 	return oracleURL;
 }
-public static Connection getConnect() {
+public  Connection getConnect() {
 	return connect;
 }
 
-public static void setOracleURL(String oracleURL) {
-	OraConn.oracleURL = oracleURL;
-}
-public static String getUserName() {
+public String getUserName() {
 	return userName;
 }
-public static void setUserName(String userName) {
-	OraConn.userName = userName;
+
+public void setUserName(String userName) {
+	this.userName = userName;
 }
-public static String getPasswd() {
+
+public String getPasswd() {
 	return passwd;
 }
-public static void setPasswd(String passwd) {
-	OraConn.passwd = passwd;
+
+public void setPasswd(String passwd) {
+	this.passwd = passwd;
 }
-public static int getErrorNr() {
+
+public int getErrorNr() {
 	return errorNr;
 }
-public static String getErrorDesc() {
+
+public String getErrorDesc() {
 	return errorDesc;
 }
+
+public void setConnect(Connection connect) {
+	this.connect = connect;
+}
+
+public void setOracleURL(String oracleURL) {
+	this.oracleURL = oracleURL;
+}
+
 }

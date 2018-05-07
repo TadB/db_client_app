@@ -1,6 +1,5 @@
 import java.util.Vector;
 public class Test {
-
 	public static void main(String[] args) {
 		String oracleURL="jdbc:oracle:thin:@ora3.elka.pw.edu.pl:1521:ora3inf";
 		String userName="epolansk";
@@ -19,15 +18,10 @@ public class Test {
 		Vector<Employee> outData=db.getEmployees();
 //		Iterator<Employee> iter=outData.iterator();
 		int iter=0;
-		while(iter<outData.size()){
-			System.out.println(
-					//TODO: wpisac brakujaca funkcje wypisujaca rekordy
-					outData.get(iter).getAll()
-					);
-			iter++;
-		}
+		printDataBase(outData);
 		//test metody pobierania danych wybranego rekordu z bazy danych szukajacego po podaniu id
-		outData=db.getEmployeeByEmployeeId(4);
+		System.out.println("metoda pobierania rekorku po podaniu id");
+		outData=db.getEmployeeByEmployeeId(167);
 		printDataBase(outData);
 
         //test metody dodawania uzytkownika
@@ -39,10 +33,10 @@ public class Test {
 
 
 
-	}
+}
 
 
-void printDataBase(Vector<Employee> outData){
+public static void printDataBase(Vector<Employee> outData){
 	//TODO: przekazac przez referencje wektor
 	int iter=0;
 		while(iter<outData.size()){
