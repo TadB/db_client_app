@@ -29,7 +29,8 @@ public class Test {
 		//utworzenie nowego rekordu 
 		Employee emp=new Employee();
 		//TODO: generowanie unikalnego klucza employeeId - nie moze zostac w taki sposob -> teraz tylko do pierwszych testow, nalezy to poprawic
-		emp.setEmployeeId(300);
+		int empID=300;
+		emp.setEmployeeId(empID);
 		emp.setFirstName("Janusz");
 		emp.setLastName("Dodany");
 		emp.setEmail("JDODANY");
@@ -44,10 +45,33 @@ public class Test {
 
 		db.insertEmployee(emp);
 		outData=db.getEmployees();
-		System.out.println("test motody dodawania nowego rekorku");
+		System.out.println("test metody dodawania nowego rekordu");
 		printDataBase(outData);
-		
 
+		//modyfikacja danej po podaniu ID
+		//testowe dane do podmiany:
+		emp.setFirstName("Kuba");
+		emp.setLastName("Zmieniony");
+		emp.setEmail("KZMIENIONY");
+		emp.setPhone("303030303");
+		date=LocalDate.parse("2012-03-21");
+		emp.setHireDate(date);
+		emp.setJobId("IT_PROG");
+		emp.setSalary(13000);
+		emp.setManagerId(103);
+		emp.setDepartmentId(60);
+
+		db.updateEmployee(empID, emp);
+		outData=db.getEmployees();
+		System.out.println("test metody modyfikacji danych");
+		printDataBase(outData);
+        
+		
+		// usuwanie rekordu po podaniu ID
+		db.delEmployee(empID);
+		outData=db.getEmployees();
+		System.out.println("test metody usuwania rekordow");
+		printDataBase(outData);
         // test zamykania pliku
 		connection.close();
 

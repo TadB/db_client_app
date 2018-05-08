@@ -70,38 +70,39 @@ public class EmployeesDAL {
         	return;
         }
     }
-    public int udpateEmployee(Employee emp){
+    public void updateEmployee(int employeeId, Employee emp){
         try (Statement statement =
             connect.createStatement();){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
         String hireDate = dtf.format(emp.getHireDate());
 
-        String query="UPDATE EMPLOYEES SET"
+        String query="UPDATE EMPLOYEES SET "
                     + "LAST_NAME = '" + emp.getLastName() + "',"
-                    + "FIST_NAME = '" + emp.getFirstName() + "',"
+                    + "FIRST_NAME = '" + emp.getFirstName() + "',"
                     + "EMAIL = '" + emp.getEmail() + "',"
                     + "PHONE_NUMBER = '" + emp.getPhone() + "',"
                     + "JOB_ID = '" + emp.getJobId() + "',"
-                    + "SALARY = " +emp.getSalary()
-                    + "MANAGER_ID = " +emp.getManagerId()
-                    + "DEPARTMENT_ID =  " +emp.getDepartmentId()
-                    + "HIRE_DATE = to_date('"+ hireDate + "', 'yyyyMMdd'),"
-                    + "WHERE "
-                    + "EMPLOYEE_ID = " + emp.getEmployeeId();
+                    + "SALARY = " +emp.getSalary() + ","
+                    + "MANAGER_ID = " +emp.getManagerId() + ","
+                    + "DEPARTMENT_ID =  " +emp.getDepartmentId()+ ","
+                    + "HIRE_DATE = to_date('"+ hireDate + "', 'yyyyMMdd')"
+                   	+ "WHERE EMPLOYEE_ID=" +employeeId;
 
-        int affectedRows=statement.executeUpdate(query);
+        System.out.println(query);
+        //int affectedRows=statement.executeUpdate(query);
+        statement.executeUpdate(query);
         connect.commit();
-        return affectedRows;
+        //return affectedRows;
 
         }
         catch(SQLException ex) {
         	this.ex = ex;
-        	return 0;
+        	//return 0;
         }
     }
     public void delEmployee(int employeeId){
         try (Statement statement = connect.createStatement();){
-            String query = "DELETE FROM EMPLOYEES WHERE EMPLOEE_ID="
+            String query = "DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID="
                         + employeeId;
             statement.executeQuery(query);
             connect.commit();
