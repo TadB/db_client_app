@@ -46,18 +46,20 @@ public class EmployeesDAL {
         try (Statement statement = connect.createStatement();){
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
             String hireDate = dtf.format(emp.getHireDate());
-
-            String query="INSERT INTO EMPLOYEES VALUES ("
-                        + emp.getEmployeeId()+ "',"
-                        + "'" + emp.getLastName() + "',"
+            //czy to wgl dziala ta data?
+            //System.out.println(hireDate);
+            //--------------------------------
+            String query="INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID) VALUES ("
+                        + emp.getEmployeeId()+ ","
                         + "'" + emp.getFirstName() + "',"
+                        + "'" + emp.getLastName() + "',"
                         + "'" + emp.getEmail() + "',"
                         + "'" + emp.getPhone() + "',"
+                        + "to_date('"+ hireDate + "', 'yyyyMMdd'), "
                         + "'" + emp.getJobId() + "',"
-                        +emp.getSalary()+ "',"
-                        +emp.getManagerId()+ "',"
-                        +emp.getDepartmentId()+ "',"
-                        + "to_date('"+ hireDate + "', 'yyyMMdd')', ";
+                        +emp.getSalary()+ ","
+                        +emp.getManagerId()+ ","
+                        +emp.getDepartmentId()+ ")";
 
             statement.executeUpdate(query);
             connect.commit();
@@ -83,7 +85,7 @@ public class EmployeesDAL {
                     + "SALARY = " +emp.getSalary()
                     + "MANAGER_ID = " +emp.getManagerId()
                     + "DEPARTMENT_ID =  " +emp.getDepartmentId()
-                    + "HIRE_DATE = to_date('"+ hireDate + "', 'yyyMMdd'),"
+                    + "HIRE_DATE = to_date('"+ hireDate + "', 'yyyyMMdd'),"
                     + "WHERE "
                     + "EMPLOYEE_ID = " + emp.getEmployeeId();
 
