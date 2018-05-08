@@ -88,7 +88,6 @@ public class EmployeesDAL {
                     + "HIRE_DATE = to_date('"+ hireDate + "', 'yyyyMMdd')"
                    	+ "WHERE EMPLOYEE_ID=" +employeeId;
 
-        System.out.println(query);
         //int affectedRows=statement.executeUpdate(query);
         statement.executeUpdate(query);
         connect.commit();
